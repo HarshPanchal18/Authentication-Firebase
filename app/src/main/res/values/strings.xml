@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Authentication-with-Firebase</string>
+    <string name="hello_you">Hello You!</string>
+    <string name="subtitle">
+        Nice to meet you, come join our community!
+        <br><b>Login</b> If you already have an account.</br>
+        <br><b>Register</b> to get started with the app.</br>
+    </string>
+    <string name="illustration_img">Illustration Image</string>
+    <string name="login_title">Login to app</string>
+    <string name="login_subtitle">
+        <font color="#00c988"><b>Login</b></font> if you already have an account.
+    </string>
+    <string name="login_mail">Your email or username</string>
+    <string name="login_pass">Your password</string>
+    <string name="login_forgot_pw">Forgot Password?</string>
+    <string name="login_havent_acc">
+        I don\'t have an account <font color="#00c988"><b>Register</b></font>
+    </string>
+    <string name="register_title">Create an Account</string>
+
+    <string name="register_subtitle">
+        <font color="#00c988"><b>Register</b></font> to get started with the app.
+    </string>
+    <string name="register_fullname">Your Full name</string>
+    <string name="register_email">Your Email</string>
+    <string name="register_c_password">Confirm Password</string>
+    <string name="register_username">Your username</string>
+    <string name="btnlogin">Login</string>
+    <string name="btnregister">Register</string>
+    <string name="register_have_acc">I already have an Account <font color="#00c988"><b>Login</b></font></string>
+    <string name="home_title">Hello World!</string>
+    <string name="home_subtitle">Welcome to Home</string>
+    <string name="logoutbtn">Logout</string>
+
+</resources>
