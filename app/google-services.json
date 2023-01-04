@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "563588175898",
+    "project_id": "authenticationapp-fd84e",
+    "storage_bucket": "authenticationapp-fd84e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563588175898:android:f2b84a134afa507f79d9a3",
+        "android_client_info": {
+          "package_name": "com.example.login_with_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563588175898-e7v0c2m5587p3b0rp14eb34ihe9mujf1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbp-Gs_NEMMD8sXfnTCHAyEfTJuIkxBps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563588175898-e7v0c2m5587p3b0rp14eb34ihe9mujf1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

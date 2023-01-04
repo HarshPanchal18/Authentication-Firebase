@@ -18,19 +18,21 @@ class LoginActivity : AppCompatActivity() {
         val userNameStream = RxTextView.textChanges(et_mail)
             .skipInitialValue()
             .map { username -> username.isEmpty() }
-            .subscribe { showTextMinimalAlert(it,"Email/Username") }
+        userNameStream.subscribe { showTextMinimalAlert(it,"Email/Username") }
 
         val passwordStream = RxTextView.textChanges(et_password)
             .skipInitialValue()
             .map { password -> password.isEmpty() }
-            .subscribe { showTextMinimalAlert(it,"Password") }
+        passwordStream.subscribe { showTextMinimalAlert(it,"Password") }
 
 
         // Button Enable/Disable
-        val invalidFieldsStream = Observable.combineLatest(userNameStream,passwordStream,
-            { usernameInvalid: Boolean, passwordInvalid: Boolean
-                -> !usernameInvalid && !passwordInvalid
-            })
+        val invalidFieldsStream :Observable<Boolean> = Observable.combineLatest(userNameStream,passwordStream,
+        ) {
+                usernameInvalid: Boolean, passwordInvalid: Boolean
+            ->
+            !usernameInvalid && !passwordInvalid
+        }
 
         invalidFieldsStream.subscribe { isValid:Boolean ->
             //if(userNameStream != null && passwordStream!=null){

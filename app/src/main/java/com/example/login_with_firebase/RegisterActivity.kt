@@ -7,7 +7,6 @@ import android.util.Patterns
 import androidx.core.content.ContextCompat
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
-import io.reactivex.functions.Function5
 import kotlinx.android.synthetic.main.activity_register.*
 
 @Suppress("CheckResult")
@@ -20,22 +19,22 @@ class RegisterActivity : AppCompatActivity() {
         val nameStream=RxTextView.textChanges(et_fullname)
             .skipInitialValue()
             .map { name -> name.isEmpty() }
-            .subscribe{ showNameExistAlert(it) }
+        nameStream.subscribe{ showNameExistAlert(it) }
 
         val emailStream=RxTextView.textChanges(et_mail)
             .skipInitialValue()
             .map { mail -> !Patterns.EMAIL_ADDRESS.matcher(mail).matches() }
-            .subscribe{ showEmailValidAlert(it) }
+        emailStream.subscribe{ showEmailValidAlert(it) }
 
         val userNameStream=RxTextView.textChanges(et_username)
             .skipInitialValue()
             .map { username -> username.length < 6 }
-            .subscribe { showTextMinimalAlert(it,"Username") }
+        userNameStream.subscribe { showTextMinimalAlert(it,"Username") }
 
         val passwordStream = RxTextView.textChanges(et_password)
             .skipInitialValue()
             .map { password -> password.length < 8 }
-            .subscribe { showTextMinimalAlert(it,"Password") }
+        passwordStream.subscribe { showTextMinimalAlert(it,"Password") }
 
         val passwordConfirmStream =
             Observable.merge(
@@ -44,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
 
                 RxTextView.textChanges(et_conf_password).skipInitialValue()
                     .map { confirmPassword -> confirmPassword.toString() != et_password.text.toString() })
-                .subscribe { showPasswordConfirmAlert(it) }
+        passwordConfirmStream.subscribe { showPasswordConfirmAlert(it) }
         // ---
 
         // Button Enable/Disable
@@ -53,14 +52,16 @@ class RegisterActivity : AppCompatActivity() {
                 emailStream,
                 userNameStream,
                 passwordStream,
-                passwordConfirmStream,
-                Function5{ nameInvalid: Boolean,
-                           emailInvalid: Boolean,
-                           usernameInvalid: Boolean,
-                           passwordInvalid: Boolean,
-                           cpasswordInvalid: Boolean
-                    -> !nameInvalid && !emailInvalid && !usernameInvalid && !passwordInvalid && !cpasswordInvalid
-                })
+                passwordConfirmStream
+        ) {
+                nameInvalid: Boolean,
+                emailInvalid: Boolean,
+                usernameInvalid: Boolean,
+                passwordInvalid: Boolean,
+                cpasswordInvalid: Boolean
+            ->
+            !nameInvalid && !emailInvalid && !usernameInvalid && !passwordInvalid && !cpasswordInvalid
+        }
 
         invalidFieldsStream.subscribe { isValid:Boolean ->
             if (isValid) {
