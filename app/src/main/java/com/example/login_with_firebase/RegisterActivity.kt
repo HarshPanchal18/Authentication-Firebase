@@ -4,16 +4,24 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.firebase.auth.FirebaseAuth
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_register.*
 
 @Suppress("CheckResult")
 class RegisterActivity : AppCompatActivity() {
+
+    private lateinit var auth:FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        // Authentication
+        auth=FirebaseAuth.getInstance()
 
         // Validation starts here
         val nameStream=RxTextView.textChanges(et_fullname)
@@ -44,7 +52,6 @@ class RegisterActivity : AppCompatActivity() {
                 RxTextView.textChanges(et_conf_password).skipInitialValue()
                     .map { confirmPassword -> confirmPassword.toString() != et_password.text.toString() })
         passwordConfirmStream.subscribe { showPasswordConfirmAlert(it) }
-        // ---
 
         // Button Enable/Disable
         val invalidFieldsStream : Observable<Boolean> = Observable.combineLatest(
@@ -65,13 +72,8 @@ class RegisterActivity : AppCompatActivity() {
 
         invalidFieldsStream.subscribe { isValid:Boolean ->
             if (isValid) {
-            /*if((nameStream.isDisposed)
-                && (emailStream.isDisposed)
-                && (userNameStream.isDisposed)
-                && (passwordStream.isDisposed)
-                && (passwordConfirmStream.isDisposed)) {*/
-                    registerbtn.isEnabled=true
-                    registerbtn.backgroundTintList=ContextCompat.getColorStateList(this,R.color.primary_color)
+                registerbtn.isEnabled=true
+                registerbtn.backgroundTintList=ContextCompat.getColorStateList(this,R.color.primary_color)
             } else {
                 registerbtn.isEnabled=false
                 registerbtn.backgroundTintList=ContextCompat.getColorStateList(this,android.R.color.darker_gray)
@@ -79,12 +81,26 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         registerbtn.setOnClickListener {
-            startActivity(Intent(this,LoginActivity::class.java))
+            val mail=et_mail.text.toString().trim()
+            val pass=et_password.text.toString().trim()
+            registerUser(mail,pass)
         }
 
         tv_have_account.setOnClickListener {
             startActivity(Intent(this,LoginActivity::class.java))
         }
+    }
+
+    private fun registerUser(mail: String, pass: String) {
+        auth.createUserWithEmailAndPassword(mail,pass)
+            .addOnCompleteListener(this) {
+                if(it.isSuccessful){
+                    startActivity(Intent(this,LoginActivity::class.java))
+                    Toast.makeText(this,"Registered Successfully",Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this,it.exception?.message,Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     private fun showNameExistAlert(isNotValid:Boolean) {
