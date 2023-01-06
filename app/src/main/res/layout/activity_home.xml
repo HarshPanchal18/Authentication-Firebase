@@ -26,6 +26,14 @@
         style="@style/SubTitle"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/databtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_data"
+        style="@style/ButtonGreen"
+        android:layout_marginTop="15sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logoutbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -5,12 +5,14 @@
       <map>
         <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/drawable/bg_button.xml" value="0.1375" />
         <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/drawable/bg_text_field.xml" value="0.1375" />
+        <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/layout/activity_data_page.xml" value="0.209375" />
         <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/layout/activity_home.xml" value="0.209375" />
         <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/layout/activity_reset_password.xml" value="0.209375" />
         <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/layout/activity_store.xml" value="0.209375" />
+        <entry key="..\:/dev/LoginwithFirebase/app/src/main/res/layout/person.xml" value="0.44854368932038835" />
       </map>
     </option>
   </component>

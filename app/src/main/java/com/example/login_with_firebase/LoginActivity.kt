@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
             val pass=et_password.text.toString().trim()
             loginUser(mail,pass)
             startActivity(Intent(this,HomeActivity::class.java))
+            finish()
         }
 
         tv_havent_account.setOnClickListener {

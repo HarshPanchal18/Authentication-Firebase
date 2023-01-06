@@ -22,8 +22,12 @@ class HomeActivity : AppCompatActivity() {
             Intent(this,LoginActivity::class.java).also {
                 it.flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(it)
-                Toast.makeText(this,"Logout Successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Logged out Successfully", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        databtn.setOnClickListener {
+            startActivity(Intent(this,DataPage::class.java))
         }
     }
 }

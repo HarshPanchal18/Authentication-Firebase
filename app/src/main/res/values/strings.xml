@@ -45,5 +45,7 @@
     <string name="back_login">
         Back to <font color="#00c988"><b>Login</b></font>
     </string>
+    <string name="show_data">Show Data</string>
+    <string name="first_name">First Name</string>
 
 </resources>
