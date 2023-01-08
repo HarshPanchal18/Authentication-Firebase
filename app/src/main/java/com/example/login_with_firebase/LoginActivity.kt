@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_login.*
@@ -34,16 +35,11 @@ class LoginActivity : AppCompatActivity() {
 
 
         // Button Enable/Disable
-        val invalidFieldsStream :Observable<Boolean> = Observable.combineLatest(userNameStream,passwordStream,
-        ) {
-                usernameInvalid: Boolean, passwordInvalid: Boolean
-            ->
-            !usernameInvalid && !passwordInvalid
+        val invalidFieldsStream :Observable<Boolean> = Observable.combineLatest(userNameStream,passwordStream) {
+                usernameInvalid: Boolean, passwordInvalid: Boolean -> !usernameInvalid && !passwordInvalid
         }
 
         invalidFieldsStream.subscribe { isValid:Boolean ->
-            //if(userNameStream != null && passwordStream!=null){
-            //if(!TextUtils.isEmpty(et_mail.text) && !TextUtils.isEmpty(et_password.text)){
             if(isValid) {
                 loginbtn.isEnabled=true
                 loginbtn.backgroundTintList= ContextCompat.getColorStateList(this,R.color.primary_color)
@@ -57,8 +53,6 @@ class LoginActivity : AppCompatActivity() {
             val mail=et_mail.text.toString().trim()
             val pass=et_password.text.toString().trim()
             loginUser(mail,pass)
-            startActivity(Intent(this,HomeActivity::class.java))
-            finish()
         }
 
         tv_havent_account.setOnClickListener {

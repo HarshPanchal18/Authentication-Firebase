@@ -16,6 +16,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         auth= FirebaseAuth.getInstance()
+        val user=auth.currentUser
+        if(user!=null)
+            startActivity(Intent(this,HomeActivity::class.java))
 
         loginbtn.setOnClickListener{
             startActivity(Intent(this,LoginActivity::class.java))
